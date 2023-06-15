@@ -37,6 +37,10 @@ async function main() {
     "./files/sortedBySsid.json",
     JSON.stringify(byAllJson.objSsid, null, 4)
   );
+  writeDataToFile(
+    "./files/sortedByMac2.json",
+    JSON.stringify(byAllJson.objMac2, null, 4)
+  );
 }
 
 main();

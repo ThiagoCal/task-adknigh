@@ -69,7 +69,7 @@ export const sortedByAll = (lines) => {
   const sortedByMac = {};
   const sortedByMain = {};
   const sortedBySsid = {};
-
+  const sortedByMac2 = {};
   lines.forEach((line) => {
     const mac = line["MAC"];
     const main = line["main"];
@@ -96,6 +96,27 @@ export const sortedByAll = (lines) => {
       sortedBySsid[ssid][main] = 0;
     }
     sortedBySsid[ssid][main]++;
+
+    if (!sortedByMac2[mac]) {
+      sortedByMac2[mac] = {};
+    }
+
+    if (!sortedByMac2[mac]["countMAC"]) {
+      sortedByMac2[mac]["countMAC"] = 0;
+    }
+    if (!sortedByMac2[mac][sub]) {
+      sortedByMac2[mac][sub] = 0;
+    }
+
+    if (!sortedByMac2[mac][sub]) {
+      sortedByMac2[mac][main] = 0;
+    }
+
+    // sortedByMac2[mac].map((elem) => elem[sub].count.value++);
+    sortedByMac2[mac][main]++;
+    sortedByMac2[mac][sub]++;
+    sortedByMac2[mac]["countMAC"]++;
+    // sortedByMac2[mac][sub][count]++;
   });
 
   const objMac = Object.entries(sortedByMac).map((entry) => {
@@ -122,5 +143,13 @@ export const sortedByAll = (lines) => {
     return a.key.localeCompare(b.key);
   });
 
-  return { objMac, objMain, objSsid };
+  const objMac2 = Object.entries(sortedByMac2).map((entry) => {
+    return { key: entry[0], values: entry[1] };
+  });
+
+  objMac2.sort((a, b) => {
+    return b.values["countMAC"] - a.values["countMAC"];
+  });
+
+  return { objMac, objMain, objSsid, objMac2 };
 };
