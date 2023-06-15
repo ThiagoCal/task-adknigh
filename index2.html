@@ -23,17 +23,15 @@
 
     function addData(data) {
 
-
       const labels = data.map(obj => {
-        return obj.key; // Get the key of the object
+        return obj.key; 
       });
 
-
       const countData = data.map(obj => {
-        const key = obj.key; // Get the key of the object
-        const values = obj.values.map(item => item.main); // Extract main values
+        const key = obj.key; 
+        const values = obj.values.map(item => item.main);
         const count = values.reduce((acc, val) => {
-          acc[val] = (acc[val] || 0) + 1; // Count occurrences of main values
+          acc[val] = (acc[val] || 0) + 1; 
           return acc;
         }, {});
         return {
@@ -42,13 +40,11 @@
         };
       });
 
-    
-
       const countDataSub = data.map(obj => {
-        const key = obj.key; // Get the key of the object
-        const values = obj.values.map(item => item.sub); // Extract main values
+        const key = obj.key; 
+        const values = obj.values.map(item => item.sub); 
         const count = values.reduce((acc, val) => {
-          acc[val] = (acc[val] || 0) + 1; // Count occurrences of main values
+          acc[val] = (acc[val] || 0) + 1; 
           return acc;
         }, {});
         return {
@@ -58,25 +54,15 @@
       });
 
      
-
       const dataMainCount = countData.map(obj => {
         const count = Object.values(obj.count)[0];
         return count;
       })
 
-
-      const dataMainCount1 = countData.map(obj => {
-        const count = Object.keys(obj.count)[0];
-        return count;
-      })
-
-
-
       const dataSubCount = countDataSub.map(obj => {
         const count = Object.values(obj.count)[0];
         return count;
       })
-     
 
       let chart = new Chart(ctx, {
         type: 'line',
@@ -86,18 +72,13 @@
         data: {
           labels: labels,
           datasets: [{
-        
             type: 'bar',
             label: 'main',
-          
             data: dataMainCount
           },
           {
-     
             type: 'bar',
-           
             label: 'sub',
-        
             data: dataSubCount
           }]
         },

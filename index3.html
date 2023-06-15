@@ -34,7 +34,6 @@
 
             return acc
           }
-
           acc[sub] = {
             ...acc[sub],
             [item.key]: count,
@@ -44,24 +43,11 @@
         }, result)
       }, {})
 
-      // const expected = {
-      //   '': {
-      //     'Local MAC': 175,
-      //     'Stationary Device': 68,
-      //     Unclassified: 57,
-      //   },
-      //   'Shenzhen Trolink Technology CO LTD': {
-      //     'Unclassified': 20,
-      //   }
-      // }
-
-      const colors = ['red', 'green', 'blue', "orange", "cyan", "yellow", "pink"]
 
       const dataSets = Object.entries(parsedData).map(([label, values], index) => {
         return {
           label: !label ? "(empty)": label,
           data: labels.map((name) => values[name] || 0),
-          // backgroundColor: colors[index],
           type: "bar"
         }
       })
