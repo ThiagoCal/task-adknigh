@@ -1,0 +1,17 @@
+{
+  "name": "taskav",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tasknew.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "mime": "^3.0.0"
+  }
+}

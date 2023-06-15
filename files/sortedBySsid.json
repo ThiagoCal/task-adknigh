@@ -1,0 +1,46 @@
+[
+    {
+        "key": "",
+        "values": {
+            "Local MAC": 175,
+            "Stationary Device": 7,
+            "Unclassified": 43
+        }
+    },
+    {
+        "key": "DIRECT+AC0-aJC1860 Series",
+        "values": {
+            "Unclassified": 34
+        }
+    },
+    {
+        "key": "Endotech",
+        "values": {
+            "Stationary Device": 33
+        }
+    },
+    {
+        "key": "Endotech Guest",
+        "values": {
+            "Stationary Device": 33
+        }
+    },
+    {
+        "key": "koren wifi",
+        "values": {
+            "Unclassified": 23
+        }
+    },
+    {
+        "key": "N+AC0-Net",
+        "values": {
+            "Stationary Device": 2
+        }
+    },
+    {
+        "key": "Wi+AC0-Charge+AF8-IOT",
+        "values": {
+            "Unclassified": 4
+        }
+    }
+]

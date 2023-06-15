@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    function fetchData(json, callback) {
+      fetch(json)
+        .then(response => response.json())
+        .then(data => callback(data))
+        .catch(error => console.error(error));
+    }
+
+    function addData(data) {
+
+
+      const labels = data.map(obj => {
+        return obj.key; // Get the key of the object
+      });
+
+
+      const countData = data.map(obj => {
+        const key = obj.key; // Get the key of the object
+        const values = obj.values.map(item => item.main); // Extract main values
+        const count = values.reduce((acc, val) => {
+          acc[val] = (acc[val] || 0) + 1; // Count occurrences of main values
+          return acc;
+        }, {});
+        return {
+          key,
+          count
+        };
+      });
+
+    
+
+      const countDataSub = data.map(obj => {
+        const key = obj.key; // Get the key of the object
+        const values = obj.values.map(item => item.sub); // Extract main values
+        const count = values.reduce((acc, val) => {
+          acc[val] = (acc[val] || 0) + 1; // Count occurrences of main values
+          return acc;
+        }, {});
+        return {
+          key,
+          count
+        };
+      });
+
+     
+
+      const dataMainCount = countData.map(obj => {
+        const count = Object.values(obj.count)[0];
+        return count;
+      })
+
+
+      const dataMainCount1 = countData.map(obj => {
+        const count = Object.keys(obj.count)[0];
+        return count;
+      })
+
+
+
+      const dataSubCount = countDataSub.map(obj => {
+        const count = Object.values(obj.count)[0];
+        return count;
+      })
+     
+
+      let chart = new Chart(ctx, {
+        type: 'line',
+        plugins: {
+          colors: { enables : true}
+        },
+        data: {
+          labels: labels,
+          datasets: [{
+        
+            type: 'bar',
+            label: 'main',
+          
+            data: dataMainCount
+          },
+          {
+     
+            type: 'bar',
+           
+            label: 'sub',
+        
+            data: dataSubCount
+          }]
+        },
+        options: {
+          responsive: true,
+        }
+      });
+    }
+
+    fetchData('./files/sortedByMac.json', addData);
+  </script>
+</body>
+</html>
+

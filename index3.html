@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    function fetchData(json, callback) {
+      fetch(json)
+        .then(response => response.json())
+        .then(data => callback(data))
+        .catch(error => console.error(error));
+    }
+    
+
+    function addData(data) {
+      const labels = data.map((item) => item.key)
+
+      const parsedData = data.reduce((result, item) => {
+        return Object.entries(item.values).reduce((acc, [sub, count]) => {
+          if (!acc[sub]) {
+            acc[sub] = {
+              [item.key]: count,
+            }
+
+            return acc
+          }
+
+          acc[sub] = {
+            ...acc[sub],
+            [item.key]: count,
+          }
+
+          return acc
+        }, result)
+      }, {})
+
+      // const expected = {
+      //   '': {
+      //     'Local MAC': 175,
+      //     'Stationary Device': 68,
+      //     Unclassified: 57,
+      //   },
+      //   'Shenzhen Trolink Technology CO LTD': {
+      //     'Unclassified': 20,
+      //   }
+      // }
+
+      const colors = ['red', 'green', 'blue', "orange", "cyan", "yellow", "pink"]
+
+      const dataSets = Object.entries(parsedData).map(([label, values], index) => {
+        return {
+          label: !label ? "(empty)": label,
+          data: labels.map((name) => values[name] || 0),
+          // backgroundColor: colors[index],
+          type: "bar"
+        }
+      })
+
+      let chart = new Chart(ctx, {
+        type: 'line',
+        plugins: {
+          colors: { enables : true}
+        },
+        data: {
+          labels: labels,
+          datasets: dataSets
+        },
+        options: {
+          responsive: true,
+        }
+      });
+    }
+
+    fetchData('./files/sortedByMain.json', addData);
+  </script>
+</body>
+</html>
+

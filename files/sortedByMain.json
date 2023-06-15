@@ -1,0 +1,26 @@
+[
+    {
+        "key": "Local MAC",
+        "values": {
+            "": 175
+        }
+    },
+    {
+        "key": "Stationary Device",
+        "values": {
+            "Shenzhen Reecam Tech.Ltd.": 6,
+            "Intel Corporate": 1,
+            "": 68
+        }
+    },
+    {
+        "key": "Unclassified",
+        "values": {
+            "": 57,
+            "Shenzhen Trolink Technology CO LTD": 20,
+            "Labtam Limited": 22,
+            "Tp+AC0-Link Technologies Co.Ltd.": 4,
+            "Amazon Technologies Inc.": 1
+        }
+    }
+]
