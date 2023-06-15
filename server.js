@@ -10,7 +10,7 @@ const server = http.createServer((request, response) => {
 
   if (filePath === "./") {
     // Serve the index.html file
-    filePath = "./index2.html";
+    filePath = "./index3.html";
   }
 
   fs.readFile(filePath, (err, content) => {
